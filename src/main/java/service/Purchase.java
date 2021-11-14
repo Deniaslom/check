@@ -16,8 +16,8 @@ public class Purchase {
     public CashReceipt getCheck(String str){
         CashReceipt cashReceipt = new CashReceipt();
 
-        cashReceipt.setDate(new Date());
-        cashReceipt.setLineChecks(CreateLineCheck.getLinesChecks(str));
+        cashReceipt.setCreationTime(new Date());
+       // cashReceipt.set(CreateLineCheck.getLinesChecks(str));
         cashReceipt.setTotalCost(CreateLineCheck.totalCost(CreateLineCheck.getLinesChecks(str)));
         System.out.println(cashReceipt.getDate());
         return cashReceipt;

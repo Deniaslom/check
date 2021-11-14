@@ -1,9 +1,8 @@
 package utils;
 
-import beans.ClientCard;
 import beans.Product;
-import generation.GenerationClientsCardDB;
-import generation.GenerationProductsDB;
+import repositories.impl.DiscountCartRepositoryImpl;
+import repositories.impl.ProductRepositoryImpl;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
@@ -22,7 +21,7 @@ public class ParsingStringCheck {
         Matcher matcher = pattern.matcher(str);
 
         while (matcher.find()) {
-            Product product = GenerationProductsDB.getInstance().getProducts().
+            Product product = ProductRepositoryImpl.getInstance().getProducts().
                     stream().
                     filter(o -> o.getId() == Integer.parseInt(matcher.group(2))).
                     findFirst().get();
@@ -39,7 +38,7 @@ public class ParsingStringCheck {
         ClientCard card = null;
         while (matcher1.find()) {
             try {
-                card = GenerationClientsCardDB.getInstance().getClientCards().
+                card = DiscountCartRepositoryImpl.getInstance().getClientCards().
                         stream().
                         filter(o -> o.getId() == Integer.parseInt(matcher1.group(2))).
                         findFirst().get();
