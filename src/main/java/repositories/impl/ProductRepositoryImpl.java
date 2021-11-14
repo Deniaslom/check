@@ -4,9 +4,7 @@ import beans.Product;
 import repositories.ProductRepository;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class ProductRepositoryImpl implements ProductRepository {
 
@@ -29,5 +27,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Optional<Product> getProductById(Integer id) {
         return Optional.ofNullable(PRODUCTS.get(id));  //.orElseThrow()
+    }
+
+    @Override
+    public Collection<Product> getProducts() {
+        return PRODUCTS.values();
     }
 }

@@ -3,9 +3,7 @@ package repositories.impl;
 import beans.DiscountCard;
 import repositories.DiscountCartRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class DiscountCartRepositoryImpl implements DiscountCartRepository {
     private static final Map<Integer, DiscountCard> DISCOUNT_CARTS;
@@ -22,5 +20,10 @@ public class DiscountCartRepositoryImpl implements DiscountCartRepository {
     @Override
     public Optional<DiscountCard> getDiscountCardByNumber(Integer number) {
         return Optional.ofNullable(DISCOUNT_CARTS.get(number));  //.orElseThrow()
+    }
+
+    @Override
+    public Collection<DiscountCard> getDiscountCards() {
+        return DISCOUNT_CARTS.values();
     }
 }

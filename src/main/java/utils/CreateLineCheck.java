@@ -15,11 +15,10 @@ public class CreateLineCheck {
 
         for (Map.Entry<Product, Integer> entry : productsFromDB.entrySet()) {
             cashReceiptEntries.add(new CashReceiptEntry(entry.getValue(),
-                                         entry.getKey(),
+                                         entry.getKey().getName(),
                                          entry.getKey().getPrice(),
                     productDiscount(entry.getKey(), entry.getValue()),
                     productCost(entry.getKey(),entry.getValue())));
-
         }
 
         return cashReceiptEntries;
@@ -41,7 +40,7 @@ public class CreateLineCheck {
     public static BigDecimal totalCost(List<CashReceiptEntry> cashReceiptEntries){
         BigDecimal totalCost = BigDecimal.ZERO;
         for(CashReceiptEntry cashReceiptEntry : cashReceiptEntries){
-            totalCost = totalCost.add(cashReceiptEntry.getTotalLineCost());
+            totalCost = totalCost.add(cashReceiptEntry.getTotalPrice());
         }
         return totalCost;
     }

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class CashReceipt {
     private List<CashReceiptEntry> entries;
-    private LocalDateTime creationTime;   // изменить на локалДате
+    private LocalDateTime creationTime;
     private BigDecimal discount;
     private BigDecimal totalPrice;
 }
