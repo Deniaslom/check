@@ -9,8 +9,8 @@ import java.util.List;
 
 @Data
 public class CashReceipt {
-    private List<CashReceiptEntry> entries;
     private LocalDateTime creationTime;
-    private BigDecimal discount;
+    private List<CashReceiptEntry> entries;
+    private BigDecimal totalDiscount;
     private BigDecimal totalPrice;
 }

@@ -17,9 +17,9 @@ public class CashReceiptService {
         CashReceipt cashReceipt = new CashReceipt();
 
         cashReceipt.setCreationTime(LocalDateTime.now());
-        cashReceipt.setEntries(CreateLineCheck.getLinesChecks(str));
-//        cashReceipt.setDiscount(CreateLineCheck.totalCost(CreateLineCheck.getLinesChecks(str)));
-        cashReceipt.setTotalPrice(CreateLineCheck.totalCost(CreateLineCheck.getLinesChecks(str)));
+        cashReceipt.setEntries(CreateLineCheck.getLinesCheck(str));
+        cashReceipt.setTotalDiscount(CreateLineCheck.totalDiscount(str));
+        cashReceipt.setTotalPrice(CreateLineCheck.totalPrice(str));
         return cashReceipt;
     }
 

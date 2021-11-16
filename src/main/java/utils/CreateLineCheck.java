@@ -1,6 +1,7 @@
 package utils;
 
 import beans.CashReceiptEntry;
+import beans.DiscountCard;
 import beans.Product;
 
 import java.math.BigDecimal;
@@ -9,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateLineCheck {
-    public static List<CashReceiptEntry> getLinesChecks(String str){
+    public static List<CashReceiptEntry> getLinesCheck(String str){
         List<CashReceiptEntry> cashReceiptEntries = new ArrayList<>();
         Map<Product, Integer> productsFromDB = ParsingStringCheck.getProductsFromDB(str);
 
@@ -18,7 +19,7 @@ public class CreateLineCheck {
                                          entry.getKey().getName(),
                                          entry.getKey().getPrice(),
                     productDiscount(entry.getKey(), entry.getValue()),
-                    productCost(entry.getKey(),entry.getValue())));
+                    productPrice(entry.getKey(),entry.getValue())));
         }
 
         return cashReceiptEntries;
@@ -26,23 +27,49 @@ public class CreateLineCheck {
 
 
     public static BigDecimal productDiscount(Product product, int quantity){
-        BigDecimal productDiscount = BigDecimal.ZERO;
+        BigDecimal  productDiscount = BigDecimal.ZERO;
         if(product.isDiscount() && quantity > 5){
-            productDiscount = productDiscount.multiply(new BigDecimal(0.05));
+            productDiscount = product.getPrice().multiply(new BigDecimal(quantity)).multiply(new BigDecimal(0.05));
         }
         return productDiscount;
     }
 
-    public static BigDecimal productCost(Product product, int quantity){
-        return product.getPrice().multiply(new BigDecimal(quantity)).subtract(productDiscount(product, quantity));
+    public static BigDecimal productPrice(Product product, int quantity){
+        BigDecimal productPrice;
+        if(product.isDiscount() && quantity > 5){
+            productPrice = product.getPrice().multiply(new BigDecimal(quantity)).subtract(productDiscount(product, quantity));
+        } else{
+            productPrice = product.getPrice().multiply(new BigDecimal(quantity));
+        }
+        return productPrice;
     }
 
-    public static BigDecimal totalCost(List<CashReceiptEntry> cashReceiptEntries){
-        BigDecimal totalCost = BigDecimal.ZERO;
-        for(CashReceiptEntry cashReceiptEntry : cashReceiptEntries){
-            totalCost = totalCost.add(cashReceiptEntry.getTotalPrice());
+    public static BigDecimal totalDiscount(String str) {
+        List<CashReceiptEntry> entries = CreateLineCheck.getLinesCheck(str);
+        BigDecimal totalPriceWithDiscount = BigDecimal.ZERO;
+
+        for (CashReceiptEntry entry : entries) {
+            totalPriceWithDiscount = totalPriceWithDiscount.add(entry.getTotalPrice());
         }
-        return totalCost;
+
+        BigDecimal totalPriceWithOutDiscount = BigDecimal.ZERO;
+
+        for (CashReceiptEntry entry : entries) {
+            totalPriceWithDiscount = totalPriceWithDiscount.add(entry.getPrice().multiply(new BigDecimal(entry.getQuantity())));
+        }
+        return totalPriceWithOutDiscount.subtract(totalPriceWithDiscount);
+    }
+
+    public static BigDecimal totalPrice(String str){
+        BigDecimal totalPrice = BigDecimal.ZERO;
+        List<CashReceiptEntry> cashReceiptEntries = CreateLineCheck.getLinesCheck(str);
+        for(CashReceiptEntry cashReceiptEntry : cashReceiptEntries){
+            totalPrice = totalPrice.add(cashReceiptEntry.getTotalPrice());
+        }
+        DiscountCard discountCart = ParsingStringCheck.getClientCartFromDb(str);
+            totalPrice.multiply(new BigDecimal((100-discountCart.getDiscount())/100));
+
+        return totalPrice;
     }
 
 }
