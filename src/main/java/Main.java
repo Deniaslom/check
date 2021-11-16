@@ -6,7 +6,8 @@ public class Main {
 
         CashReceiptService cashReceiptService = new CashReceiptService();
 
-        String str = "2-1 3-1 4-1 5-1 6-1 7-1 8-1 9-1 10-1 card-1234";
+//        String str = "1-1 2-1 3-1 4-1 5-1 6-1 7-1 8-1 9-1 10-1 card-1234";
+        String str = "2-6 card-1234";
 
         CashReceipt check = cashReceiptService.getCheck(str);
 

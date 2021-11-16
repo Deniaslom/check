@@ -55,7 +55,7 @@ public class CreateLineCheck {
         BigDecimal totalPriceWithOutDiscount = BigDecimal.ZERO;
 
         for (CashReceiptEntry entry : entries) {
-            totalPriceWithDiscount = totalPriceWithDiscount.add(entry.getPrice().multiply(new BigDecimal(entry.getQuantity())));
+            totalPriceWithOutDiscount = totalPriceWithOutDiscount.add(entry.getPrice().multiply(new BigDecimal(entry.getQuantity())));
         }
         return totalPriceWithOutDiscount.subtract(totalPriceWithDiscount);
     }
