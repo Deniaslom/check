@@ -19,7 +19,7 @@ public class CashReceiptRequestParser {
         request.setProductsWithQuantity(getListProductsByCheck(str));
         request.setIdCard(getDiscountCardFromCheck(str));
 
-        return null;
+        return request;
     }
 
     private static Map<Integer, Integer> getListProductsByCheck(String str){

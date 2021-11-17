@@ -6,8 +6,7 @@ import repositories.ProductRepository;
 import java.math.BigDecimal;
 import java.util.*;
 
-//@Data
-//@NoArgsConstructor
+
 public final class ProductRepositoryImpl implements ProductRepository {
 
     private static final Map<Integer, Product> PRODUCTS;
@@ -29,10 +28,5 @@ public final class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Optional<Product> getProductById(Integer id) {
         return Optional.ofNullable(PRODUCTS.get(id));  //.orElseThrow()
-    }
-
-    @Override
-    public Map<Integer, Product> getProducts() {
-        return PRODUCTS;
     }
 }
