@@ -1,12 +1,12 @@
-package service.impl;
+package calculations.impl;
 
+import calculations.CashReceiptEntryCanculationStrategy;
 import models.Product;
-import service.interfaces.CashReceiptEntryCanculationStrategy;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class CashReceiptEntryCanculationStrategyImpl implements CashReceiptEntryCanculationStrategy {
+public class CashReceiptEntryCalculationStrategyImpl implements CashReceiptEntryCanculationStrategy {
     @Override
     public BigDecimal productDiscount(Product product, int quantity) {
         BigDecimal  productDiscount = BigDecimal.ZERO;

@@ -1,4 +1,4 @@
-package service.interfaces;
+package calculations;
 
 import models.Product;
 
