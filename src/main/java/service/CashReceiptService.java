@@ -1,9 +1,10 @@
 package service;
 
-import beans.CashReceipt;
-import beans.CashReceiptEntry;
-import beans.DiscountCard;
+import models.CashReceipt;
+import models.CashReceiptEntry;
+import models.DiscountCard;
 import org.apache.log4j.Logger;
+import service.impl.CashReceiptEntryServiceImpl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class CashReceiptService {
     private static final Logger LOGGER = Logger.getLogger(CashReceiptService.class);
-    private static final CashReceiptEntryService ENTRY_SERVICE = new CashReceiptEntryService();
+    private static final CashReceiptEntryServiceImpl ENTRY_SERVICE = new CashReceiptEntryServiceImpl();
     private static final DiscountCartService DISCOUNT_CART_SERVICE = new DiscountCartService();
 
     public CashReceiptService() {

@@ -1,8 +1,7 @@
 package repositories;
 
-import beans.Product;
+import models.Product;
 
-import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 

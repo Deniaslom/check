@@ -1,11 +1,11 @@
-package service;
+package service.impl;
 
-import beans.CashReceiptEntry;
-import beans.Product;
+import models.CashReceiptEntry;
+import models.Product;
 import repositories.ProductRepository;
 import repositories.impl.ProductRepositoryImpl;
+import service.interfaces.CashReceiptEntryCanculationStrategy;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,20 +14,21 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CashReceiptEntryService {
+public class CashReceiptEntryServiceImpl {
     private final static ProductRepository productRepository = new ProductRepositoryImpl();
+    private final static CashReceiptEntryCanculationStrategy CANCULATION_STRATEGY = new CashReceiptEntryCanculationStrategyImpl();
 
     public List<CashReceiptEntry> getListCashReceiptEntries(String str){
         List<CashReceiptEntry> cashReceiptEntries = new ArrayList<>();
-        Map<Product, Integer> productsFromDB = getListProductsByCheck(str);
+        Map<Product, Integer> products = getListProductsByCheck(str);
 
-        for (Map.Entry<Product, Integer> entry : productsFromDB.entrySet()) {
+        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             cashReceiptEntries.add(new CashReceiptEntry(
                     entry.getValue(),
                     entry.getKey().getName(),
                     entry.getKey().getPrice().setScale(2, RoundingMode.HALF_UP),
-                    productDiscount(entry.getKey(), entry.getValue()),
-                    productPrice(entry.getKey(),entry.getValue())));
+                    CANCULATION_STRATEGY.productDiscount(entry.getKey(), entry.getValue()),
+                    CANCULATION_STRATEGY.productPrice(entry.getKey(),entry.getValue())));
         }
 
         return cashReceiptEntries;
@@ -47,24 +48,4 @@ public class CashReceiptEntryService {
         }
         return listProductsByCheck;
     }
-
-
-    public static BigDecimal productDiscount(Product product, int quantity){
-        BigDecimal  productDiscount = BigDecimal.ZERO;
-        if(product.isDiscount() && quantity > 5){
-            productDiscount = product.getPrice().multiply(new BigDecimal(quantity)).multiply(new BigDecimal(0.05));
-        }
-        return productDiscount.setScale(2, RoundingMode.HALF_UP);
-    }
-
-    public static BigDecimal productPrice(Product product, int quantity){
-        BigDecimal productPrice;
-        if(product.isDiscount() && quantity > 5){
-            productPrice = product.getPrice().multiply(new BigDecimal(quantity)).subtract(productDiscount(product, quantity));
-        } else{
-            productPrice = product.getPrice().multiply(new BigDecimal(quantity));
-        }
-        return productPrice.setScale(2, RoundingMode.HALF_UP);
-    }
-
 }

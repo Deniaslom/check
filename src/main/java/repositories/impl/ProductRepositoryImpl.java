@@ -1,8 +1,6 @@
 package repositories.impl;
 
-import beans.Product;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import models.Product;
 import repositories.ProductRepository;
 
 import java.math.BigDecimal;

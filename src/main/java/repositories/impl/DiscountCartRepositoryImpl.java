@@ -1,6 +1,6 @@
 package repositories.impl;
 
-import beans.DiscountCard;
+import models.DiscountCard;
 import repositories.DiscountCartRepository;
 
 import java.util.*;
