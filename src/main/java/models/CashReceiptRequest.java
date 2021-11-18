@@ -11,5 +11,4 @@ public class CashReceiptRequest {
 
     private Map<Integer, Integer> productsWithQuantity;
     private Integer idCard;
-
 }

@@ -1,0 +1,17 @@
+       ======= CASH RECEIPT =======
+Time: 2021-11-18T23:49:29.901783100
+QTY   DESCRIPTION    PRICE   DISCOUNT   TOTAL
+ 20        milk     123,00      0,00    2460,00
+ 30       apple      57,00    171,00    1539,00
+  3        meat     432,00      0,00    1296,00
+ 11      Orange      34,00     37,40     336,60
+ 11   cucumbers      13,12      0,00     144,32
+ 11     bananas      12,10     13,31     119,79
+ 11      Cherry      23,20      0,00     255,20
+ 81   pineapple       7,12     57,67     519,05
+ 11      crisps       8,12      0,00      89,32
+ 51  tangerines      41,12    209,71    1887,41
+
+    Total discount with card: 1569.93
+Cart: 1234, discount: 12,50%
+Total price: 7565.85

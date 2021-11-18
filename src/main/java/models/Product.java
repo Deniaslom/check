@@ -14,5 +14,4 @@ public class Product {
     private String name;
     private BigDecimal price;
     private boolean isDiscount;
-
 }

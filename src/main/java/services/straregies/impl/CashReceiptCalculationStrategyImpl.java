@@ -32,7 +32,5 @@ public class CashReceiptCalculationStrategyImpl implements CashReceiptCalculatio
 
         cashReceipt.setTotalPrice(totalPrice.setScale(2, RoundingMode.HALF_UP));
         cashReceipt.setTotalDiscount(totalDiscount.setScale(2, RoundingMode.HALF_UP));
-
     }
-
 }

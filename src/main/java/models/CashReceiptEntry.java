@@ -15,6 +15,4 @@ public class CashReceiptEntry {
     private Product product;
     private BigDecimal discount;
     private BigDecimal totalPrice;
-
-
 }

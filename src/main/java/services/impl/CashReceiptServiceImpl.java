@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 
 public class CashReceiptServiceImpl implements CashReceiptService {
+
     private static final Logger LOGGER = Logger.getLogger(CashReceiptServiceImpl.class);
     private CashReceiptEntryService cashReceiptEntryService;
     private CashReceiptCalculationStrategy cashReceiptCalculationStrategy;

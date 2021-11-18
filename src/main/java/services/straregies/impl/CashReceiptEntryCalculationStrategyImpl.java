@@ -4,6 +4,7 @@ import models.CashReceiptEntry;
 import services.straregies.CashReceiptEntryCalculationStrategy;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CashReceiptEntryCalculationStrategyImpl implements CashReceiptEntryCalculationStrategy {
 
@@ -18,7 +19,7 @@ public class CashReceiptEntryCalculationStrategyImpl implements CashReceiptEntry
         } else {
             totalPrice = receiptEntry.getProduct().getPrice().multiply(new BigDecimal(receiptEntry.getQuantity()));
         }
-        receiptEntry.setDiscount(discount);
-        receiptEntry.setTotalPrice(totalPrice);
+        receiptEntry.setDiscount(discount.setScale(2, RoundingMode.HALF_UP));
+        receiptEntry.setTotalPrice(totalPrice.setScale(2, RoundingMode.HALF_UP));
     }
 }
