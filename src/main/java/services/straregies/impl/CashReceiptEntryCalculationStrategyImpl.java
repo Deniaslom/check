@@ -12,11 +12,11 @@ public class CashReceiptEntryCalculationStrategyImpl implements CashReceiptEntry
         BigDecimal discount = BigDecimal.ZERO;
         BigDecimal totalPrice;
 
-        if(receiptEntry.isDiscount() && receiptEntry.getQuantity() > 5){
-            discount = receiptEntry.getPrice().multiply(new BigDecimal(receiptEntry.getQuantity())).multiply(new BigDecimal(0.1));
-            totalPrice = receiptEntry.getPrice().multiply(new BigDecimal(receiptEntry.getQuantity())).multiply(new BigDecimal(0.9));
+        if(receiptEntry.getProduct().isDiscount() && receiptEntry.getQuantity() > 5){
+            discount = receiptEntry.getProduct().getPrice().multiply(new BigDecimal(receiptEntry.getQuantity())).multiply(new BigDecimal(0.1));
+            totalPrice = receiptEntry.getProduct().getPrice().multiply(new BigDecimal(receiptEntry.getQuantity())).multiply(new BigDecimal(0.9));
         } else {
-            totalPrice = receiptEntry.getPrice().multiply(new BigDecimal(receiptEntry.getQuantity()));
+            totalPrice = receiptEntry.getProduct().getPrice().multiply(new BigDecimal(receiptEntry.getQuantity()));
         }
         receiptEntry.setDiscount(discount);
         receiptEntry.setTotalPrice(totalPrice);

@@ -24,7 +24,7 @@ public class CashReceiptCalculationStrategyImpl implements CashReceiptCalculatio
         for (CashReceiptEntry entry : entries) {
             totalPriceWithDiscount = totalPriceWithDiscount
                     .add(entry.getTotalPrice());
-            totalPriceWithOutDiscount = totalPriceWithOutDiscount.add(entry.getPrice().multiply(new BigDecimal(entry.getQuantity())));
+            totalPriceWithOutDiscount = totalPriceWithOutDiscount.add(entry.getProduct().getPrice().multiply(new BigDecimal(entry.getQuantity())));
         }
 
         totalPrice = totalPriceWithDiscount.multiply(new BigDecimal((100 - discountCart.getDiscount()) / 100));
