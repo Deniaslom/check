@@ -1,8 +1,6 @@
 package Parser;
 
 import models.CashReceiptRequest;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,8 +8,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CashReceiptRequestParser {
-    private static final Logger LOGGER = Logger.getLogger(CashReceiptRequestParser.class);
-
 
     public static CashReceiptRequest getCashReceiptRequestParser(String str) {
         CashReceiptRequest request = new CashReceiptRequest();
@@ -45,7 +41,7 @@ public class CashReceiptRequestParser {
             try {
                 card = Integer.parseInt(matcher1.group(2));
             } catch (Exception e) {
-                LOGGER.log(Level.ERROR, "cart not found: " + e);
+                System.out.println("cart not found: " + e);
             }
         }
         return card;

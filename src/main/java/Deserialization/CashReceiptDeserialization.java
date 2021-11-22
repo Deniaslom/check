@@ -2,6 +2,6 @@ package Deserialization;
 
 import models.CashReceipt;
 
-public interface CashReceiptDeserializer {
+public interface CashReceiptDeserialization {
     String deserialize(CashReceipt cashReceipt);
 }

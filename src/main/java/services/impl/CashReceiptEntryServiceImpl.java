@@ -31,7 +31,8 @@ public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
 
         while(iterator.hasNext()){
             Map.Entry<Integer, Integer> entry = iterator.next();
-            Product product = productRepository.getProductById(entry.getKey()).get();  //throw
+            Product product = productRepository.getProductById(entry.getKey()).orElseThrow(() -> new NullPointerException("product is missing by ID = " + entry.getKey()));
+
             CashReceiptEntry cashReceiptEntry = new CashReceiptEntry();
             cashReceiptEntry.setQuantity(entry.getValue());
             cashReceiptEntry.setProduct(product);

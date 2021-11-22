@@ -2,7 +2,7 @@ package services.impl;
 
 import models.CashReceipt;
 import models.CashReceiptRequest;
-import org.apache.log4j.Logger;
+import models.DiscountCard;
 import repositories.DiscountCartRepository;
 import services.CashReceiptEntryService;
 import services.CashReceiptService;
@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 
 public class CashReceiptServiceImpl implements CashReceiptService {
 
-    private static final Logger LOGGER = Logger.getLogger(CashReceiptServiceImpl.class);
     private CashReceiptEntryService cashReceiptEntryService;
     private CashReceiptCalculationStrategy cashReceiptCalculationStrategy;
     private DiscountCartRepository cartRepository;
@@ -31,7 +30,7 @@ public class CashReceiptServiceImpl implements CashReceiptService {
 
         cashReceipt.setCreationTime(LocalDateTime.now());
         cashReceipt.setEntries(cashReceiptEntryService.getCashReceiptEntries(request));
-        cashReceipt.setCard(cartRepository.getDiscountCardByNumber(request.getIdCard()).get());   //Throw
+        cashReceipt.setCard(cartRepository.getDiscountCardByNumber(request.getIdCard()).orElse(new DiscountCard(null, 0)));
         cashReceiptCalculationStrategy.calculate(cashReceipt);
 
         return cashReceipt;
