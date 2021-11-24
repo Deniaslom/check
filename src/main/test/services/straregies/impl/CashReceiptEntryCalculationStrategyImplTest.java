@@ -8,40 +8,61 @@ import org.junit.Test;
 import services.straregies.CashReceiptEntryCalculationStrategy;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static org.junit.Assert.assertEquals;
 
 public class CashReceiptEntryCalculationStrategyImplTest {
-    private CashReceiptEntryCalculationStrategy cashReceiptEntryCalculationStrategy;
+
+    private static final Integer PRODUCT_ID = 5;
+    private static final String PRODUCT_NAME = "milk";
+    private static final BigDecimal PRODUCT_PRICE = new BigDecimal(10);
+    private static final int PRODUCT_QUANTITY = 6;
+
+    private CashReceiptEntryCalculationStrategy calculationStrategy = new CashReceiptEntryCalculationStrategyImpl();
     private CashReceiptEntry cashReceiptEntry;
+    private Product product;
 
     @Before
     public void before() {
-        cashReceiptEntryCalculationStrategy = new CashReceiptEntryCalculationStrategyImpl();
         cashReceiptEntry = new CashReceiptEntry();
+        product= new Product(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, FALSE);
+        cashReceiptEntry.setProduct(product);
+        cashReceiptEntry.setQuantity(PRODUCT_QUANTITY);
     }
 
     @Test
-    public void calculateWithoutDiscount() {
-        Product product = new Product(5, "milk", new BigDecimal(10), false);
+    public void shouldCalculateWhenProductIsNotDiscount(){
+        calculationStrategy.calculate(cashReceiptEntry);
 
-        cashReceiptEntry.setProduct(product);
-        cashReceiptEntry.setQuantity(5);
-
-        cashReceiptEntryCalculationStrategy.calculate(cashReceiptEntry);
-
-        assert (cashReceiptEntry.getTotalPrice().intValue() == 50);
-        assert (cashReceiptEntry.getDiscount().intValue() == 0);
+        assertEquals(cashReceiptEntry.getTotalPrice(), getPrice(60));
+        assertEquals(cashReceiptEntry.getDiscount(), getPrice(0));
     }
 
     @Test
-    public void calculateWithDiscount() {
-        Product product = new Product(5, "meat", new BigDecimal(100), true);
+    public void shouldCalculateWhenProductIsDiscountAndQuantityMoreThan5(){
+        product.setDiscount(TRUE);
+        calculationStrategy.calculate(cashReceiptEntry);
 
-        cashReceiptEntry.setProduct(product);
-        cashReceiptEntry.setQuantity(30);
+        assertEquals(cashReceiptEntry.getTotalPrice(), getPrice(54));
+        assertEquals(cashReceiptEntry.getDiscount(), getPrice(6));
+    }
 
-        cashReceiptEntryCalculationStrategy.calculate(cashReceiptEntry);
 
-        assert (cashReceiptEntry.getTotalPrice().doubleValue() == 2700);
-        assert (cashReceiptEntry.getDiscount().doubleValue() == 300);
+    @Test
+    public void shouldCalculateTotalWhenProductIsDiscountAndQuantityLessThan5(){
+        product.setDiscount(TRUE);
+        cashReceiptEntry.setQuantity(3);
+        calculationStrategy.calculate(cashReceiptEntry);
+
+        assertEquals(cashReceiptEntry.getTotalPrice(), getPrice(30));
+        assertEquals(cashReceiptEntry.getDiscount(), getPrice(0));
+
+    }
+
+    private BigDecimal getPrice(double price){
+        return new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
     }
 }

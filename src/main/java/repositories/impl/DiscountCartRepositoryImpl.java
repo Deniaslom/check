@@ -21,6 +21,6 @@ public class DiscountCartRepositoryImpl implements DiscountCartRepository {
 
     @Override
     public Optional<DiscountCard> getDiscountCardByNumber(Integer number) {
-        return Optional.ofNullable(DISCOUNT_CARTS.get(number));  //.orElseThrow()
+        return Optional.ofNullable(DISCOUNT_CARTS.get(number));
     }
 }
