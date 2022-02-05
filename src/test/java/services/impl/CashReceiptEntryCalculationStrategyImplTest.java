@@ -1,18 +1,19 @@
-package services.straregies.impl;
+package services.impl;
 
 
 import models.CashReceiptEntry;
 import models.Product;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import services.straregies.CashReceiptEntryCalculationStrategy;
+import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CashReceiptEntryCalculationStrategyImplTest {
 
@@ -25,7 +26,7 @@ public class CashReceiptEntryCalculationStrategyImplTest {
     private CashReceiptEntry cashReceiptEntry;
     private Product product;
 
-    @Before
+    @BeforeEach
     public void before() {
         cashReceiptEntry = new CashReceiptEntry();
         product= new Product(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, FALSE);

@@ -1,5 +1,5 @@
        ======= CASH RECEIPT =======
-Time: 2021-11-22T21:22:20.080098300
+Time: 2022-02-05T19:05:31.986
 QTY   DESCRIPTION    PRICE   DISCOUNT   TOTAL
  20        milk     123,00      0,00    2460,00
  30       apple      57,00    171,00    1539,00
@@ -12,6 +12,6 @@ QTY   DESCRIPTION    PRICE   DISCOUNT   TOTAL
  11      crisps       8,12      0,00      89,32
  51  tangerines      41,12    209,71    1887,41
 
-    Total discount with card: 489.09
-Cart: null, discount: 0,00%
-Total price: 8646.69
+    Total discount with card: 1569.93
+Cart: 1234, discount: 12,50%
+Total price: 7565.85

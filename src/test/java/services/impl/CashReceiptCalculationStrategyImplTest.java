@@ -1,39 +1,38 @@
-package services.straregies.impl;
+package services.impl;
 
 
 import Parser.CashReceiptRequestParser;
 import models.CashReceipt;
 import models.CashReceiptRequest;
-import org.junit.Before;
-import org.junit.Test;
-import repositories.DiscountCartRepository;
-import repositories.ProductRepository;
-import repositories.impl.DiscountCartRepositoryImpl;
-import repositories.impl.ProductRepositoryImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import services.CashReceiptEntryService;
 import services.CashReceiptService;
-import services.impl.CashReceiptEntryServiceImpl;
-import services.impl.CashReceiptServiceImpl;
+import services.DiscountCartService;
+import services.ProductService;
 import services.straregies.CashReceiptCalculationStrategy;
 import services.straregies.CashReceiptEntryCalculationStrategy;
+import services.straregies.impl.CashReceiptCalculationStrategyImpl;
+import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class CashReceiptCalculationStrategyImplTest {
 
-    private ProductRepository productRepository = new ProductRepositoryImpl();
-    private DiscountCartRepository cartRepository = new DiscountCartRepositoryImpl();
+    private ProductService productService = new ProductServiceImpl();
+    private DiscountCartService cartService = new DiscountCartServiceImpl();
     private CashReceiptEntryCalculationStrategy entryCalculationStrategy = new CashReceiptEntryCalculationStrategyImpl();
     private CashReceiptCalculationStrategy calculationStrategy = new CashReceiptCalculationStrategyImpl();
 
-    private CashReceiptEntryService cashReceiptEntryService = new CashReceiptEntryServiceImpl(productRepository, entryCalculationStrategy);
-    private CashReceiptService cashReceiptService = new CashReceiptServiceImpl(cashReceiptEntryService, calculationStrategy, cartRepository);
+    private CashReceiptEntryService cashReceiptEntryService = new CashReceiptEntryServiceImpl(productService, entryCalculationStrategy);
+    private CashReceiptService cashReceiptService = new CashReceiptServiceImpl(cashReceiptEntryService, calculationStrategy, cartService);
     private CashReceipt cashReceipt;
 
-    @Before
+    @BeforeEach
     public void before() {
     }
 
