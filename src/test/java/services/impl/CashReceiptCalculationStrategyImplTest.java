@@ -1,7 +1,7 @@
 package services.impl;
 
 
-import Parser.CashReceiptRequestParser;
+import parser.CashReceiptRequestParser;
 import models.CashReceipt;
 import models.CashReceiptRequest;
 import org.junit.jupiter.api.BeforeEach;

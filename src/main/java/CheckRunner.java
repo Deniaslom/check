@@ -1,15 +1,12 @@
 import Deserialization.impl.DefaultFormatCashReceipt;
-import Parser.CashReceiptRequestParser;
+import parser.CashReceiptRequestParser;
 import models.CashReceipt;
 import models.CashReceiptRequest;
 import printers.CashReceiptPrinter;
 import printers.impl.CashReceiptConsolePrinter;
 import printers.impl.CashReceiptFilePrinter;
-import repositories.DiscountCartRepository;
-import repositories.ProductRepository;
 import services.CashReceiptEntryService;
 import services.CashReceiptService;
-import services.DiscountCartService;
 import services.impl.CashReceiptEntryServiceImpl;
 import services.impl.CashReceiptServiceImpl;
 import services.impl.DiscountCartServiceImpl;
