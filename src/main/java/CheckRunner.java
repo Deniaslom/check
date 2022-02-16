@@ -1,4 +1,4 @@
-import Deserialization.impl.DefaultFormatCashReceipt;
+import serializations.impl.DefaultFormatCashReceipt;
 import parser.CashReceiptRequestParser;
 import models.CashReceipt;
 import models.CashReceiptRequest;

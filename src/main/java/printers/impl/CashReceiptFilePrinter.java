@@ -1,6 +1,6 @@
 package printers.impl;
 
-import Deserialization.CashReceiptDeserialization;
+import serializations.CashReceiptSerialization;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import models.CashReceipt;
@@ -12,7 +12,7 @@ import java.io.IOException;
 @Data
 @AllArgsConstructor
 public class CashReceiptFilePrinter implements CashReceiptPrinter {
-    private CashReceiptDeserialization cashReceiptDeserialization;
+    private CashReceiptSerialization cashReceiptDeserialization;
 
     @Override
     public void print(CashReceipt cashReceipt) {
