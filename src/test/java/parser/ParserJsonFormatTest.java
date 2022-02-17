@@ -26,6 +26,8 @@ class ParserJsonFormatTest {
 
         String str = objectMapper.writeValueAsString(product_1);
         String myJson = getJson(product_1);
+        System.out.println(str);
+        System.out.println(myJson);
 
         assert(myJson.equals(str));
     }

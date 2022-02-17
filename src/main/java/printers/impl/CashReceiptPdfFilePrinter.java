@@ -2,7 +2,10 @@ package printers.impl;
 
 
 import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
+import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
@@ -17,33 +20,36 @@ import printers.CashReceiptPrinter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.List;
 
 public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
 
     @Override
-    public void print(CashReceipt check) throws FileNotFoundException {
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter("cash_receipt.pdf"));
-        Document doc = new Document(pdfDoc);
-
-        doc.add(getInfoTable());
-        doc.add(getProductsTable(check));
-        doc.add(getInfoTotalPurchase(check));
-        doc.close();
-    }
+    public void print(CashReceipt check) throws IOException {
+        PdfDocument backPdfDocument = new PdfDocument(new PdfReader("clevertec.pdf"));
 
 
-    private static void writeUsingIText(CashReceipt check) throws IOException {
-        PdfDocument pdfDoc = new PdfDocument(new PdfWriter("test.pdf"));
-        Document doc = new Document(pdfDoc);
+        PdfDocument receiptPdfDocument = new PdfDocument(new PdfWriter("cash_receipt.pdf"));
+        receiptPdfDocument.addNewPage();
 
-        doc.add(getInfoTable());
-        doc.add(getProductsTable(check));
-        doc.add(getInfoTotalPurchase(check));
+        Document document = new Document(receiptPdfDocument);
+        document.add(getInfoTable());
+        document.add(getProductsTable(check));
+        document.add(getInfoTotalPurchase(check));
 
+        PdfCanvas canvas = new PdfCanvas(receiptPdfDocument.getFirstPage().newContentStreamBefore(),
+                receiptPdfDocument.getFirstPage().getResources(), receiptPdfDocument);
 
+        PdfFormXObject pdfFormXObject = backPdfDocument.getFirstPage().copyAsFormXObject(receiptPdfDocument);
+        canvas.addXObjectAt(pdfFormXObject, 0, 0);
 
-        doc.close();
+        backPdfDocument.close();
+        receiptPdfDocument.close();
+        document.close();
     }
 
     private static Table getInfoTable(){

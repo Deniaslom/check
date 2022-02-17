@@ -16,9 +16,10 @@ import services.straregies.impl.CashReceiptCalculationStrategyImpl;
 import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class CheckRunner {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         CashReceiptEntryService entryService = new CashReceiptEntryServiceImpl(new ProductServiceImpl(), new CashReceiptEntryCalculationStrategyImpl());
         CashReceiptService cashReceiptService = new CashReceiptServiceImpl(entryService, new CashReceiptCalculationStrategyImpl(), new DiscountCartServiceImpl());
 
