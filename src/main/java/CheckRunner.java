@@ -1,3 +1,4 @@
+import printers.impl.CashReceiptPdfFilePrinter;
 import serializations.impl.DefaultFormatCashReceipt;
 import parser.CashReceiptRequestParser;
 import models.CashReceipt;
@@ -14,8 +15,10 @@ import services.impl.ProductServiceImpl;
 import services.straregies.impl.CashReceiptCalculationStrategyImpl;
 import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
+import java.io.FileNotFoundException;
+
 public class CheckRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         CashReceiptEntryService entryService = new CashReceiptEntryServiceImpl(new ProductServiceImpl(), new CashReceiptEntryCalculationStrategyImpl());
         CashReceiptService cashReceiptService = new CashReceiptServiceImpl(entryService, new CashReceiptCalculationStrategyImpl(), new DiscountCartServiceImpl());
 
@@ -26,8 +29,10 @@ public class CheckRunner {
 
         CashReceiptPrinter consolePrinter = new CashReceiptConsolePrinter(new DefaultFormatCashReceipt());
         CashReceiptPrinter filePrinter = new CashReceiptFilePrinter(new DefaultFormatCashReceipt());
+        CashReceiptPrinter pdfFilePrinter = new CashReceiptPdfFilePrinter();
 
         consolePrinter.print(check);
         filePrinter.print(check);
+        pdfFilePrinter.print(check);
     }
 }
