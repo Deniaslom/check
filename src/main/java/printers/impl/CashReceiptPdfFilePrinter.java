@@ -37,7 +37,7 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
         receiptPdfDocument.addNewPage();
 
         Document document = new Document(receiptPdfDocument);
-        document.add(getInfoTable().setMarginTop(100));
+        document.add(getInfoTable());
         document.add(getProductsTable(check));
         document.add(getInfoTotalPurchase(check));
 
@@ -54,7 +54,7 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
     }
 
     private static Table getInfoTable(){
-        Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
+        Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth().setMarginTop(100);
 
         table.setHorizontalAlignment(HorizontalAlignment.CENTER)
                 .setVerticalAlignment(VerticalAlignment.MIDDLE)
