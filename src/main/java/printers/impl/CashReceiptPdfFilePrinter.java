@@ -37,9 +37,10 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
         receiptPdfDocument.addNewPage();
 
         Document document = new Document(receiptPdfDocument);
-        document.add(getInfoTable());
+        document.add(getInfoTable().setMarginTop(100));
         document.add(getProductsTable(check));
         document.add(getInfoTotalPurchase(check));
+
 
         PdfCanvas canvas = new PdfCanvas(receiptPdfDocument.getFirstPage().newContentStreamBefore(),
                 receiptPdfDocument.getFirstPage().getResources(), receiptPdfDocument);
