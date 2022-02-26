@@ -1,8 +1,7 @@
 package printers;
 
-import models.CashReceipt;
+import model.CashReceipt;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface CashReceiptPrinter {

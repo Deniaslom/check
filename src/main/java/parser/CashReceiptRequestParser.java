@@ -1,6 +1,6 @@
 package parser;
 
-import models.CashReceiptRequest;
+import model.CashReceiptRequest;
 
 import java.util.HashMap;
 import java.util.Map;

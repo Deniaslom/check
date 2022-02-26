@@ -14,26 +14,21 @@ import com.itextpdf.layout.properties.HorizontalAlignment;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import com.itextpdf.layout.properties.VerticalAlignment;
-import models.CashReceipt;
-import models.CashReceiptEntry;
+import model.CashReceipt;
+import model.CashReceiptEntry;
 import printers.CashReceiptPrinter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.List;
 
-public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
+public class CashReceiptPdfFilePrinter implements CashReceiptPrinter {
+    private static PdfDocument backPdfDocument = null;
+    private static PdfDocument receiptPdfDocument = null;
 
     @Override
     public void print(CashReceipt check) throws IOException {
-        PdfDocument backPdfDocument = new PdfDocument(new PdfReader("clevertec.pdf"));
-
-
-        PdfDocument receiptPdfDocument = new PdfDocument(new PdfWriter("cash_receipt.pdf"));
+        backPdfDocument = new PdfDocument(new PdfReader("clevertec.pdf"));
+        receiptPdfDocument = new PdfDocument(new PdfWriter("cash_receipt.pdf"));
         receiptPdfDocument.addNewPage();
 
         Document document = new Document(receiptPdfDocument);
@@ -53,7 +48,7 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
         document.close();
     }
 
-    private static Table getInfoTable(){
+    private Table getInfoTable() {
         Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth().setMarginTop(100);
 
         table.setHorizontalAlignment(HorizontalAlignment.CENTER)
@@ -78,11 +73,11 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
         return table;
     }
 
-    private static Table getProductsTable(CashReceipt check){
+    private Table getProductsTable(CashReceipt check) {
         List<CashReceiptEntry> listProducts = check.getEntries();
         Table tableProducts = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth();
 
-        for (CashReceiptEntry product : listProducts){
+        for (CashReceiptEntry product : listProducts) {
             Cell qty = new Cell(1, 1).add(new Paragraph(String.valueOf(product.getQuantity())));
             Cell description = new Cell(1, 1).add(new Paragraph(String.valueOf(product.getProduct().getName())));
             Cell price = new Cell(1, 1).add(new Paragraph(String.valueOf(product.getProduct().getPrice())));
@@ -99,19 +94,19 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter{
         return tableProducts;
     }
 
-    private static Table getInfoTotalPurchase(CashReceipt check){
+    private Table getInfoTotalPurchase(CashReceipt check) {
         Table totalPurchase = new Table(UnitValue.createPercentArray(2)).useAllAvailableWidth();
 
-            Cell totalDiscount = new Cell(2, 2).
-                    add(new Paragraph(String.valueOf("Total discount with card: " + check.getTotalDiscount())));
-            Cell cart = new Cell(1, 1).add(new Paragraph(String.valueOf("Cart: " + check.getCard().getNumber())));
-            Cell discount = new Cell(1, 1).add(new Paragraph("discount: " + String.valueOf(check.getCard().getDiscount() + "%")));
-            Cell totalPrice = new Cell(1, 1).add(new Paragraph("Total price: " + check.getTotalPrice()));
+        Cell totalDiscount = new Cell(2, 2).
+                add(new Paragraph(String.valueOf("Total discount with card: " + check.getTotalDiscount())));
+        Cell cart = new Cell(1, 1).add(new Paragraph(String.valueOf("Cart: " + check.getCard().getNumber())));
+        Cell discount = new Cell(1, 1).add(new Paragraph("discount: " + String.valueOf(check.getCard().getDiscount() + "%")));
+        Cell totalPrice = new Cell(1, 1).add(new Paragraph("Total price: " + check.getTotalPrice()));
 
-            totalPurchase.addCell(totalDiscount);
-            totalPurchase.addCell(cart);
-            totalPurchase.addCell(discount);
-            totalPurchase.addCell(totalPrice);
+        totalPurchase.addCell(totalDiscount);
+        totalPurchase.addCell(cart);
+        totalPurchase.addCell(discount);
+        totalPurchase.addCell(totalPrice);
 
         return totalPurchase;
     }

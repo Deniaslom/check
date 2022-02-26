@@ -1,6 +1,6 @@
 package services.impl;
 
-import models.Product;
+import model.Product;
 import repositories.ProductRepository;
 import services.ProductService;
 

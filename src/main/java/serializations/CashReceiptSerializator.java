@@ -1,7 +1,7 @@
 package serializations;
 
-import models.CashReceipt;
+import model.CashReceipt;
 
-public interface CashReceiptSerialization {
+public interface CashReceiptSerializator {
     String deserialize(CashReceipt cashReceipt);
 }

@@ -1,15 +1,15 @@
 package printers.impl;
 
-import serializations.CashReceiptSerialization;
+import serializations.CashReceiptSerializator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import models.CashReceipt;
+import model.CashReceipt;
 import printers.CashReceiptPrinter;
 
 @Data
 @AllArgsConstructor
 public class CashReceiptConsolePrinter implements CashReceiptPrinter {
-    private CashReceiptSerialization cashReceiptDeserialization;
+    private CashReceiptSerializator cashReceiptDeserialization;
 
     @Override
     public void print(CashReceipt cashReceipt) {

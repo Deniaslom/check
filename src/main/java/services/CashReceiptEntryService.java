@@ -1,7 +1,7 @@
 package services;
 
-import models.CashReceiptEntry;
-import models.CashReceiptRequest;
+import model.CashReceiptEntry;
+import model.CashReceiptRequest;
 
 import java.util.List;
 

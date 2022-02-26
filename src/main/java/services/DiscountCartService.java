@@ -1,6 +1,6 @@
 package services;
 
-import models.DiscountCard;
+import model.DiscountCard;
 
 import java.util.Optional;
 

@@ -1,10 +1,10 @@
 package serializations.impl;
 
-import serializations.CashReceiptSerialization;
-import models.CashReceipt;
-import models.CashReceiptEntry;
+import serializations.CashReceiptSerializator;
+import model.CashReceipt;
+import model.CashReceiptEntry;
 
-public class DefaultFormatCashReceipt implements CashReceiptSerialization {
+public class DefaultFormatCashReceipt implements CashReceiptSerializator {
 
     @Override
     public String deserialize(CashReceipt cashReceipt) {

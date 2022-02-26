@@ -1,8 +1,8 @@
 import printers.impl.CashReceiptPdfFilePrinter;
 import serializations.impl.DefaultFormatCashReceipt;
 import parser.CashReceiptRequestParser;
-import models.CashReceipt;
-import models.CashReceiptRequest;
+import model.CashReceipt;
+import model.CashReceiptRequest;
 import printers.CashReceiptPrinter;
 import printers.impl.CashReceiptConsolePrinter;
 import printers.impl.CashReceiptFilePrinter;
@@ -15,7 +15,6 @@ import services.impl.ProductServiceImpl;
 import services.straregies.impl.CashReceiptCalculationStrategyImpl;
 import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class CheckRunner {

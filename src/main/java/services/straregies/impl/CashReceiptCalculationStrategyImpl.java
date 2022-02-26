@@ -1,8 +1,8 @@
 package services.straregies.impl;
 
-import models.CashReceipt;
-import models.CashReceiptEntry;
-import models.DiscountCard;
+import model.CashReceipt;
+import model.CashReceiptEntry;
+import model.DiscountCard;
 import services.straregies.CashReceiptCalculationStrategy;
 
 import java.math.BigDecimal;
