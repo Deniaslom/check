@@ -1,9 +1,8 @@
 package services.impl;
 
-import models.CashReceipt;
-import models.CashReceiptRequest;
-import models.DiscountCard;
-import repositories.DiscountCartRepository;
+import model.CashReceipt;
+import model.CashReceiptRequest;
+import model.DiscountCard;
 import services.CashReceiptEntryService;
 import services.CashReceiptService;
 import services.DiscountCartService;

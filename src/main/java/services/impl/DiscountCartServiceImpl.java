@@ -1,6 +1,6 @@
 package services.impl;
 
-import models.DiscountCard;
+import model.DiscountCard;
 import repositories.DiscountCartRepository;
 import services.DiscountCartService;
 

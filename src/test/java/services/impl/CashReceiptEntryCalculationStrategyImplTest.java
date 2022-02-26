@@ -1,8 +1,8 @@
 package services.impl;
 
 
-import models.CashReceiptEntry;
-import models.Product;
+import model.CashReceiptEntry;
+import model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import services.straregies.CashReceiptEntryCalculationStrategy;

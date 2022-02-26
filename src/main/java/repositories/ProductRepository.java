@@ -1,6 +1,6 @@
 package repositories;
 
-import models.Product;
+import model.Product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

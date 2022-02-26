@@ -11,7 +11,7 @@ public class ParserJsonFormat {
         Class<?> aClass = obj.getClass();
         Field[] declaredFields = aClass.getDeclaredFields();
         stringJson.append("{");
-        for (int i = 0; i < declaredFields.length; i++) {
+        for (int i = 0; i < declaredFields.length - 1; i++) {
             Field f = declaredFields[i];
             if (isNumber(f, obj)) {
                 stringJson.append(getFormatJsonJustField(f, obj));
@@ -23,7 +23,7 @@ public class ParserJsonFormat {
                 f.setAccessible(false);
             }
 
-            if (i < declaredFields.length - 1)
+            if (i < declaredFields.length - 2)
                 stringJson.append(",");
 
         }

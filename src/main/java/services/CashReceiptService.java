@@ -1,7 +1,7 @@
 package services;
 
-import models.CashReceipt;
-import models.CashReceiptRequest;
+import model.CashReceipt;
+import model.CashReceiptRequest;
 
 public interface CashReceiptService {
 

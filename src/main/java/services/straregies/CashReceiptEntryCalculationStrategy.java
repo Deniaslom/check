@@ -1,6 +1,6 @@
 package services.straregies;
 
-import models.CashReceiptEntry;
+import model.CashReceiptEntry;
 
 public interface CashReceiptEntryCalculationStrategy {
 

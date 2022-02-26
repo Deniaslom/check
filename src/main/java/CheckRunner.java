@@ -1,7 +1,8 @@
-import Deserialization.impl.DefaultFormatCashReceipt;
+import printers.impl.CashReceiptPdfFilePrinter;
+import serializations.impl.DefaultFormatCashReceipt;
 import parser.CashReceiptRequestParser;
-import models.CashReceipt;
-import models.CashReceiptRequest;
+import model.CashReceipt;
+import model.CashReceiptRequest;
 import printers.CashReceiptPrinter;
 import printers.impl.CashReceiptConsolePrinter;
 import printers.impl.CashReceiptFilePrinter;
@@ -14,8 +15,10 @@ import services.impl.ProductServiceImpl;
 import services.straregies.impl.CashReceiptCalculationStrategyImpl;
 import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
+import java.io.IOException;
+
 public class CheckRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         CashReceiptEntryService entryService = new CashReceiptEntryServiceImpl(new ProductServiceImpl(), new CashReceiptEntryCalculationStrategyImpl());
         CashReceiptService cashReceiptService = new CashReceiptServiceImpl(entryService, new CashReceiptCalculationStrategyImpl(), new DiscountCartServiceImpl());
 
@@ -26,8 +29,10 @@ public class CheckRunner {
 
         CashReceiptPrinter consolePrinter = new CashReceiptConsolePrinter(new DefaultFormatCashReceipt());
         CashReceiptPrinter filePrinter = new CashReceiptFilePrinter(new DefaultFormatCashReceipt());
+        CashReceiptPrinter pdfFilePrinter = new CashReceiptPdfFilePrinter();
 
         consolePrinter.print(check);
         filePrinter.print(check);
+        pdfFilePrinter.print(check);
     }
 }

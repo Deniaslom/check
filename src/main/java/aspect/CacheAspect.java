@@ -9,7 +9,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import caching.algoritm.Cache;
 import factories.CacheFactory;
-import models.Product;
+import model.Product;
 import repositories.ProductRepository;
 
 import java.util.Optional;

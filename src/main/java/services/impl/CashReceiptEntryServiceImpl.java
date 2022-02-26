@@ -1,9 +1,8 @@
 package services.impl;
 
-import models.CashReceiptEntry;
-import models.CashReceiptRequest;
-import models.Product;
-import repositories.ProductRepository;
+import model.CashReceiptEntry;
+import model.CashReceiptRequest;
+import model.Product;
 import services.CashReceiptEntryService;
 import services.ProductService;
 import services.straregies.CashReceiptEntryCalculationStrategy;
