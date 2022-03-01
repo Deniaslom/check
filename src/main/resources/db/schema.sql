@@ -1,47 +1,41 @@
-CREATE TABLE department
+CREATE TABLE warehouse
 (
-    department_id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(30)
+    product_id INT PRIMARY KEY,
+    count      INT
 );
 
-INSERT INTO department(name)
-VALUES
-    ('marketing'),
-    ('sales'),
-    ('supply');
+INSERT INTO warehouse(product_id, count)
+VALUES (1, 20),
+       (2, 30),
+       (3, 70),
+       (4, 89),
+       (5, 50),
+       (6, 100),
+       (7, 75),
+       (8, 78),
+       (9, 25),
+       (10, 65);
 
-CREATE TABLE trip
+
+
+CREATE TABLE product
 (
-    trip_id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(30),
-    city VARCHAR(25),
-    per_diem DECIMAL(8,2),
-    date_first DATE,
-    date_last DATE,
-    department_id INT NOT NULL,
-    FOREIGN KEY (department_id)  REFERENCES department (department_id)
+    product_id   BIGSERIAL NOT NULL PRIMARY KEY,
+    name         VARCHAR(30),
+    price        DECIMAL(8, 2),
+    isDiscount   BOOLEAN,
+    warehouse_id INT,
+    FOREIGN KEY (warehouse_id) REFERENCES warehouse (product_id)
 );
 
-INSERT INTO trip(name, city, per_diem, date_first, date_last, department_id)
-VALUES
-    ('Баранов П.Е.', 'Москва', '700', '2020-01-12', '2020-01-17', 1),
-    ('Абрамова К.А.', 'Владивосток', '450', '2020-01-14', '2020-01-27', 2),
-    ('Семенов И.В.', 'Москва', '700', '2020-01-23', '2020-01-31', 3),
-    ('Ильиных Г.Р.', 'Владивосток', '450', '2020-01-12', '2020-02-02', 1),
-    ('Колесов С.П.', 'Москва', '700', '2020-02-01', '2020-02-06', 2),
-    ('Баранов П.Е.', 'Москва', '700', '2020-02-14', '2020-02-22', 1),
-    ('Абрамова К.А.', 'Москва', '700', '2020-02-23', '2020-03-01', 2),
-    ('Лебедев Т.К.', 'Москва', '700', '2020-03-03', '2020-03-06', 3),
-    ('Колесов С.П.', 'Новосибирск', '450', '2020-02-27', '2020-03-12', 2),
-    ('Семенов И.В.', 'Санкт-Петербург', '700', '2020-03-29', '2020-04-05', 3),
-    ('Абрамова К.А.', 'Москва', '700', '2020-04-06', '2020-04-14', 2),
-    ('Баранов П.Е.', 'Новосибирск', '450', '2020-04-18', '2020-05-04', 1),
-    ('Лебедев Т.К.', 'Томск', '450', '2020-05-20', '2020-05-31', 3),
-    ('Семенов И.В.', 'Санкт-Петербург', '700', '2020-06-01', '2020-06-03', 3),
-    ('Абрамова К.А.', 'Санкт-Петербург', '700', '2020-05-28', '2020-06-04', 2),
-    ('Федорова А.Ю.', 'Новосибирск', '450', '2020-05-25', '2020-06-04', 3),
-    ('Колесов С.П.', 'Новосибирск', '450', '2020-06-03', '2020-06-12', 2),
-    ('Федорова А.Ю.', 'Томск', '450', '2020-06-20', '2020-06-26', 3),
-    ('Абрамова К.А.', 'Владивосток', '450', '2020-07-02', '2020-07-13', 2),
-    ('Баранов П.Е.', 'Воронеж', '450', '2020-07-19', '2020-07-25', 1);
-SELECT * FROM trip;
+INSERT INTO product(name, price, isDiscount, warehouse_id)
+VALUES ('milk', '123', FALSE, 1),
+       ('apple', '57', TRUE, 2),
+       ('meat', '432', FALSE, 3),
+       ('Orange', '34', TRUE, 4),
+       ('cucumbers', '13.12', FALSE, 5),
+       ('bananas', '12.1', TRUE, 6),
+       ('Cherry', '23.2', FALSE, 7),
+       ('pineapple', '7.12', TRUE, 8),
+       ('crisps', '8.12', FALSE, 9),
+       ('tangerines', '41.12', TRUE, 10);
