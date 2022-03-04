@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Before;
 import caching.algoritm.Cache;
 import factory.CacheFactory;
 import model.Product;
-import repositories.ProductRepository;
+import repositories.impl.ProductRepositoryImpl;
 
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
 @Log
 public class CacheAspect {
     private static final Cache<Object> cache = CacheFactory.getInstance().getCache();
-    private ProductRepository productRepository = new ProductRepository();
+    private ProductRepositoryImpl productRepository = new ProductRepositoryImpl();
 
     @AfterReturning(value = "execution(* services.impl.ProductServiceImpl.addProduct(..))", returning = "product")
     public void addProduct(Product product) {

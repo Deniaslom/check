@@ -1,4 +1,6 @@
+import model.DiscountCard;
 import printers.impl.CashReceiptPdfFilePrinter;
+import repositories.impl.CartRepositoryImpl;
 import serializations.impl.DefaultFormatCashReceipt;
 import parser.CashReceiptRequestParser;
 import model.CashReceipt;
@@ -16,6 +18,7 @@ import services.straregies.impl.CashReceiptCalculationStrategyImpl;
 import services.straregies.impl.CashReceiptEntryCalculationStrategyImpl;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class CheckRunner {
     public static void main(String[] args) throws IOException {
@@ -34,5 +37,19 @@ public class CheckRunner {
         consolePrinter.print(check);
         filePrinter.print(check);
         pdfFilePrinter.print(check);
+
+
+        CartRepositoryImpl cartRepository = new CartRepositoryImpl();
+        Map<Integer, DiscountCard> discountCarts = cartRepository.getCarts();
+        System.out.println(discountCarts);
+        for (DiscountCard card : discountCarts.values()){
+            System.out.println(card);
+        }
+
+        System.out.println("//////////////");
+        cartRepository.deleteById(2);
+        System.out.println("//////////////");
+
+
     }
 }

@@ -1,7 +1,7 @@
 package services.impl;
 
 import model.Product;
-import repositories.ProductRepository;
+import repositories.impl.ProductRepositoryImpl;
 import services.ProductService;
 
 import java.math.BigDecimal;
@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.util.Optional;
 
 public class ProductServiceImpl implements ProductService {
-    private ProductRepository productRepository = new ProductRepository();
+    private ProductRepositoryImpl productRepository = new ProductRepositoryImpl();
 
     public Optional<Product> getProductById(Integer id) {
         return Optional.ofNullable(productRepository.getProducts().get(id));  //.orElseThrow()
