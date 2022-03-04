@@ -1,4 +1,4 @@
-package factories;
+package factory;
 
 import lombok.Setter;
 import caching.InitCacheByConfig;

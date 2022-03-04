@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import caching.algoritm.Cache;
-import factories.CacheFactory;
+import factory.CacheFactory;
 import model.Product;
 import repositories.ProductRepository;
 
