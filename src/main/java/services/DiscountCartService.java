@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface DiscountCartService {
 
-    public Optional<DiscountCard> getDiscountCardByNumber(Integer number);
+    Optional<DiscountCard> getDiscountCardByNumber(Integer number);
 }

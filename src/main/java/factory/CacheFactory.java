@@ -1,10 +1,10 @@
 package factory;
 
-import lombok.Setter;
 import caching.InitCacheByConfig;
 import caching.algoritm.Cache;
 import caching.algoritm.LFUCache;
 import caching.algoritm.LRUCache;
+import lombok.Setter;
 
 /**
  * Depending on the cache type specified in resources/application.yml, a cache object is created
@@ -17,9 +17,11 @@ public class CacheFactory {
 
     private static CacheFactory instance;
 
-    private CacheFactory(){}
-    public static CacheFactory getInstance(){
-        if(instance == null){
+    private CacheFactory() {
+    }
+
+    public static CacheFactory getInstance() {
+        if (instance == null) {
             instance = new CacheFactory();
         }
         return instance;

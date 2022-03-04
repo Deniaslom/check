@@ -1,18 +1,16 @@
 package aspect;
 
+import caching.algoritm.Cache;
+import factory.CacheFactory;
 import lombok.extern.java.Log;
+import model.Product;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import caching.algoritm.Cache;
-import factory.CacheFactory;
-import model.Product;
 import repositories.impl.ProductRepositoryImpl;
-
-import java.util.Optional;
 
 
 @Aspect
@@ -49,7 +47,8 @@ public class CacheAspect {
             cache.set(product.getId(), product);
         }
         joinPoint.proceed();
-        log.info("get product from cache by id = " + id);;
+        log.info("get product from cache by id = " + id);
+
         return cache.get(id);
     }
 }

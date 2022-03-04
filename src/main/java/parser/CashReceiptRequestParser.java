@@ -18,7 +18,7 @@ public class CashReceiptRequestParser {
         return request;
     }
 
-    private static Map<Integer, Integer> getListProductsByCheck(String str){
+    private static Map<Integer, Integer> getListProductsByCheck(String str) {
         Map<Integer, Integer> listProductsByCheck = new HashMap<>();
 
         Pattern pattern = Pattern.compile("(([0-9]+)-([0-9]+))+");
@@ -33,7 +33,7 @@ public class CashReceiptRequestParser {
         return listProductsByCheck;
     }
 
-    private static Integer getDiscountCardFromCheck(String str){
+    private static Integer getDiscountCardFromCheck(String str) {
         Pattern pattern1 = Pattern.compile("(card)-([1-9]+)");
         Matcher matcher1 = pattern1.matcher(str);
         Integer card = null;

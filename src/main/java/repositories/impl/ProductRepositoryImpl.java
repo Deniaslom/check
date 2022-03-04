@@ -5,7 +5,6 @@ import model.Product;
 import repositories.ProductRepository;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,10 +19,11 @@ public final class ProductRepositoryImpl implements ProductRepository {
     private static final String GET_ALL_PRODUCTS = "SELECT * FROM product";
     private static final String GET_PRODUCT_BY_ID = "SELECT * FROM product WHERE product_id = ?";
     private static final String ADD_PRODUCT = "INSERT INTO product(name, price, isdiscount) VALUES (?, ?, ?)";
+    private static final String UPDATE_PRODUCT = "UPDATE product SET name = ?, price = ?, isdiscount = ? WHERE product_id = ?";
     private static final String DELETE_PRODUCT_BY_ID = "DELETE FROM product WHERE product_id = ?";
 
     @Override
-    public Map<Integer, Product> getProducts(){
+    public Map<Integer, Product> getProducts() {
         Map<Integer, Product> products = new HashMap<>();
 
         try {
@@ -70,8 +70,6 @@ public final class ProductRepositoryImpl implements ProductRepository {
             statement.setString(1, product.getName());
             statement.setBigDecimal(2, product.getPrice());
             statement.setBoolean(3, product.isDiscount());
-            System.out.println(product);
-            System.out.println(product.isDiscount());
             int result = statement.executeUpdate();
             return result == 1;
         } catch (SQLException e) {
@@ -91,7 +89,20 @@ public final class ProductRepositoryImpl implements ProductRepository {
         }
     }
 
-    private static BigDecimal getBigDecimal(double price) {
-        return new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+    @Override
+    public Product updateProduct(int id, Product product) {
+        try {
+            PreparedStatement statement = cn.prepareStatement(UPDATE_PRODUCT);
+            statement.setInt(4, id);
+            statement.setString(1, product.getName());
+            statement.setBigDecimal(2, product.getPrice());
+            statement.setBoolean(3, product.isDiscount());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return getProductById(id);
     }
+
 }

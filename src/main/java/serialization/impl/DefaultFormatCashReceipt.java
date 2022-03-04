@@ -1,8 +1,8 @@
 package serialization.impl;
 
-import serialization.CashReceiptSerializator;
 import model.CashReceipt;
 import model.CashReceiptEntry;
+import serialization.CashReceiptSerializator;
 
 public class DefaultFormatCashReceipt implements CashReceiptSerializator {
 

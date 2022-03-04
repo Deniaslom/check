@@ -2,7 +2,8 @@ package parser;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 public class ParserJsonFormat {
 
@@ -15,7 +16,7 @@ public class ParserJsonFormat {
             Field f = declaredFields[i];
             if (isNumber(f, obj)) {
                 stringJson.append(getFormatJsonJustField(f, obj));
-            } else if(isCollection(f)){
+            } else if (isCollection(f)) {
                 stringJson.append(getFormatJsonJustListField(f, obj));
             } else {
                 f.setAccessible(true);

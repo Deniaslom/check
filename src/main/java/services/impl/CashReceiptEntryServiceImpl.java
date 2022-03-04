@@ -7,7 +7,10 @@ import services.CashReceiptEntryService;
 import services.ProductService;
 import services.straregies.CashReceiptEntryCalculationStrategy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
 
@@ -26,7 +29,7 @@ public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
         Map<Integer, Integer> productsWithQuantity = request.getProductsWithQuantity();
         Iterator<Map.Entry<Integer, Integer>> iterator = productsWithQuantity.entrySet().iterator();
 
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Map.Entry<Integer, Integer> entry = iterator.next();
             Product product = null;
             try {
