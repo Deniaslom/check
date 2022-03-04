@@ -47,7 +47,6 @@ public class CartRepositoryImpl implements CartRepository {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-
                 cart.setNumber(resultSet.getInt(1));
                 cart.setDiscount(resultSet.getDouble(2));
             }

@@ -7,10 +7,7 @@ import services.CashReceiptEntryService;
 import services.ProductService;
 import services.straregies.CashReceiptEntryCalculationStrategy;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
 
@@ -31,8 +28,12 @@ public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
 
         while(iterator.hasNext()){
             Map.Entry<Integer, Integer> entry = iterator.next();
-            Product product = productService.getProductById(entry.getKey()).orElseThrow(() -> new NullPointerException("product is missing by ID = " + entry.getKey()));
-
+            Product product = null;
+            try {
+                product = productService.getProductById(entry.getKey());  //почему требует try-catch
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             CashReceiptEntry cashReceiptEntry = new CashReceiptEntry();
             cashReceiptEntry.setQuantity(entry.getValue());
             cashReceiptEntry.setProduct(product);

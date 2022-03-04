@@ -45,11 +45,11 @@ public class CacheAspect {
         Product product;
 
         if (cache.get(id) == null) {
-            product = productRepository.getProducts().get(id);
+            product = productRepository.getProductById(id);
             cache.set(product.getId(), product);
         }
         joinPoint.proceed();
         log.info("get product from cache by id = " + id);;
-        return Optional.of(cache.get(id));
+        return cache.get(id);
     }
 }

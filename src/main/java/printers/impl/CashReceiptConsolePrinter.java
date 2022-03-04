@@ -1,6 +1,6 @@
 package printers.impl;
 
-import serializations.CashReceiptSerializator;
+import serialization.CashReceiptSerializator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import model.CashReceipt;

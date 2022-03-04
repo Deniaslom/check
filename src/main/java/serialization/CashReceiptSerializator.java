@@ -1,4 +1,4 @@
-package serializations;
+package serialization;
 
 import model.CashReceipt;
 

@@ -1,6 +1,6 @@
-package serializations.impl;
+package serialization.impl;
 
-import serializations.CashReceiptSerializator;
+import serialization.CashReceiptSerializator;
 import model.CashReceipt;
 import model.CashReceiptEntry;
 

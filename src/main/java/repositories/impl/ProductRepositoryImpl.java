@@ -1,32 +1,94 @@
 package repositories.impl;
 
+import connection.ConnectionDB;
 import model.Product;
+import repositories.ProductRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 
-public final class ProductRepositoryImpl {
+public final class ProductRepositoryImpl implements ProductRepository {
+    private static final Connection cn = ConnectionDB.getConnection();
 
-    private static final Map<Integer, Product> PRODUCTS;
+    private static final String GET_ALL_PRODUCTS = "SELECT * FROM product";
+    private static final String GET_PRODUCT_BY_ID = "SELECT * FROM product WHERE product_id = ?";
+    private static final String ADD_PRODUCT = "INSERT INTO product(name, price, isdiscount) VALUES (?, ?, ?)";
+    private static final String DELETE_PRODUCT_BY_ID = "DELETE FROM product WHERE product_id = ?";
 
-    static {
-        PRODUCTS = new HashMap<>();
-        PRODUCTS.put(1, new Product(1, "milk", getBigDecimal(123), false));
-        PRODUCTS.put(2, new Product(2, "apple", getBigDecimal(57), true));
-        PRODUCTS.put(3, new Product(3, "meat", getBigDecimal(432), false));
-        PRODUCTS.put(4, new Product(4, "Orange", getBigDecimal(34), true));
-        PRODUCTS.put(5, new Product(5, "cucumbers", getBigDecimal(13.12), false));
-        PRODUCTS.put(6, new Product(6, "bananas", getBigDecimal(12.1), true));
-        PRODUCTS.put(7, new Product(7, "Cherry", getBigDecimal(23.2), false));
-        PRODUCTS.put(8, new Product(8, "pineapple", getBigDecimal(7.12), true));
-        PRODUCTS.put(9, new Product(9, "crisps", getBigDecimal(8.12), false));
-        PRODUCTS.put(10, new Product(10, "tangerines", getBigDecimal(41.12), true));
+    @Override
+    public Map<Integer, Product> getProducts(){
+        Map<Integer, Product> products = new HashMap<>();
+
+        try {
+            PreparedStatement statement = cn.prepareStatement(GET_ALL_PRODUCTS);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Product product = new Product();
+                product.setId(resultSet.getInt(1));
+                product.setName(resultSet.getString(2));
+                product.setPrice(BigDecimal.valueOf(resultSet.getDouble(3)));
+                product.setDiscount(resultSet.getBoolean(4));
+                products.put(product.getId(), product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 
-    public Map<Integer, Product> getProducts(){
-        return PRODUCTS;
+    @Override
+    public Product getProductById(int id) {
+        Product product = new Product();
+
+        try {
+            PreparedStatement statement = cn.prepareStatement(GET_PRODUCT_BY_ID);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                product.setId(resultSet.getInt(1));
+                product.setName(resultSet.getString(2));
+                product.setPrice(BigDecimal.valueOf(resultSet.getDouble(3)));
+                product.setDiscount(resultSet.getBoolean(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
+    @Override
+    public boolean addProduct(Product product) {
+        try {
+            PreparedStatement statement = cn.prepareStatement(ADD_PRODUCT);
+            statement.setString(1, product.getName());
+            statement.setBigDecimal(2, product.getPrice());
+            statement.setBoolean(3, product.isDiscount());
+            System.out.println(product);
+            System.out.println(product.isDiscount());
+            int result = statement.executeUpdate();
+            return result == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public void deleteProductById(int id) {
+        try {
+            PreparedStatement statement = cn.prepareStatement(DELETE_PRODUCT_BY_ID);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static BigDecimal getBigDecimal(double price) {
