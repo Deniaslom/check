@@ -1,10 +1,10 @@
 package printers.impl;
 
-import serializations.CashReceiptSerializator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import model.CashReceipt;
 import printers.CashReceiptPrinter;
+import serialization.CashReceiptSerializator;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class CashReceiptFilePrinter implements CashReceiptPrinter {
 
     @Override
     public void print(CashReceipt cashReceipt) {
-        try(FileWriter writer = new FileWriter("cash_receipt.txt", false)){
+        try (FileWriter writer = new FileWriter("cash_receipt.txt", false)) {
             writer.write(cashReceiptDeserialization.deserialize(cashReceipt));
             writer.flush();
         } catch (IOException ex) {

@@ -2,7 +2,8 @@ package parser;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 public class ParserJsonFormat {
 
@@ -12,24 +13,22 @@ public class ParserJsonFormat {
         Field[] declaredFields = aClass.getDeclaredFields();
         stringJson.append("{");
         for (int i = 0; i < declaredFields.length - 1; i++) {
+
             Field f = declaredFields[i];
             if (isNumber(f, obj)) {
+                if(i != 0)
+                    stringJson.append(",");
                 stringJson.append(getFormatJsonJustField(f, obj));
-            } else if(isCollection(f)){
+            } else if (isCollection(f)) {
+                if(i != 0)
+                    stringJson.append(",");
                 stringJson.append(getFormatJsonJustListField(f, obj));
-            } else {
-                f.setAccessible(true);
-                stringJson.append(getJson(f.get(obj)));
-                f.setAccessible(false);
             }
-
-            if (i < declaredFields.length - 2)
-                stringJson.append(",");
-
         }
         stringJson.append("}");
         return String.valueOf(stringJson);
     }
+
 
     private static StringBuilder getFormatJsonJustField(Field f, Object obj) throws IllegalAccessException {
         f.setAccessible(true);

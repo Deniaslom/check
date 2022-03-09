@@ -39,3 +39,17 @@ VALUES ('milk', '123', FALSE, 1),
        ('pineapple', '7.12', TRUE, 8),
        ('crisps', '8.12', FALSE, 9),
        ('tangerines', '41.12', TRUE, 10);
+
+CREATE TABLE cart
+(
+    cart_id  BIGSERIAL NOT NULL PRIMARY KEY,
+    discount DECIMAL(8, 2)
+);
+
+INSERT INTO cart(discount)
+VALUES ('12.5'),
+       ('13'),
+       ('13.2'),
+       ('9.5'),
+       ('8.5'),
+       ('0');

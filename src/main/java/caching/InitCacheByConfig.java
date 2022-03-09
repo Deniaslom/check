@@ -2,9 +2,9 @@ package caching;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import factory.CacheFactory;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import factory.CacheFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,10 +24,10 @@ public class InitCacheByConfig {
 
         try {
             CacheConfig cacheConfig = om.readValue(file, CacheConfig.class);
-                cacheFactory.setCacheType(cacheConfig.cacheType);
-                cacheFactory.setCapacity(cacheConfig.capacity);
-                log.config("cacheType = " + cacheConfig.cacheType + "; capacity = " + cacheConfig.capacity);
-                return true;
+            cacheFactory.setCacheType(cacheConfig.cacheType);
+            cacheFactory.setCapacity(cacheConfig.capacity);
+            log.config("cacheType = " + cacheConfig.cacheType + "; capacity = " + cacheConfig.capacity);
+            return true;
 
         } catch (IOException e) {
             e.printStackTrace();

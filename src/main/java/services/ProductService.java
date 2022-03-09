@@ -2,14 +2,13 @@ package services;
 
 import model.Product;
 
-import java.util.Optional;
-
 public interface ProductService {
-    public Optional<Product> getProductById(Integer id);
 
-    public Product addProduct(int id, Product product);
+    Product getProductById(int id);
 
-    public void deleteProductById(int id);
+    Product save(Product product);
 
-    public Product updateProduct(int id, Product product);
+    void delete(int id);
+
+    void update(int id, Product product);
 }
