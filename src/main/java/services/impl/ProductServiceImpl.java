@@ -12,18 +12,18 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.getProductById(id);
     }
 
-    public Product addProduct(int id, Product product) {
-        productRepository.addProduct(product);
+    public Product save(Product product) {
+        productRepository.save(product);
         return product;
     }
 
-    public void deleteProductById(int id) {
-        productRepository.deleteProductById(id);
+    public void delete(int id) {
+        productRepository.delete(id);
     }
 
     @Override
-    public Product updateProduct(int id, Product product) {
-        return productRepository.updateProduct(id, product);
+    public void update(int id, Product product) {
+        productRepository.update(id, product);
     }
 
 }

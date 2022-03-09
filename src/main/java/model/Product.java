@@ -3,6 +3,7 @@ package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -16,4 +17,6 @@ public class Product {
     private String name;
     private BigDecimal price;
     private boolean isDiscount;
+
+
 }

@@ -30,7 +30,7 @@ public class CashReceiptServiceImpl implements CashReceiptService {
 
         cashReceipt.setCreationTime(LocalDateTime.now());
         cashReceipt.setEntries(cashReceiptEntryService.getCashReceiptEntries(request));
-        cashReceipt.setCard(discountCartService.getDiscountCardByNumber(request.getIdCard()).orElse(new DiscountCard(null, 0)));
+        cashReceipt.setCard(discountCartService.getDiscountCardByNumber(request.getIdCard()));
         cashReceiptCalculationStrategy.calculate(cashReceipt);
 
         return cashReceipt;

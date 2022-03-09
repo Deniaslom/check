@@ -4,11 +4,11 @@ import model.Product;
 
 public interface ProductService {
 
-    Product getProductById(int id) throws Exception;
+    Product getProductById(int id);
 
-    Product addProduct(int id, Product product);
+    Product save(Product product);
 
-    void deleteProductById(int id);
+    void delete(int id);
 
-    Product updateProduct(int id, Product product);
+    void update(int id, Product product);
 }

@@ -1,5 +1,6 @@
 package services.impl;
 
+import lombok.SneakyThrows;
 import model.CashReceiptEntry;
 import model.CashReceiptRequest;
 import model.Product;
@@ -28,15 +29,9 @@ public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
 
         Map<Integer, Integer> productsWithQuantity = request.getProductsWithQuantity();
         Iterator<Map.Entry<Integer, Integer>> iterator = productsWithQuantity.entrySet().iterator();
-
         while (iterator.hasNext()) {
             Map.Entry<Integer, Integer> entry = iterator.next();
-            Product product = null;
-            try {
-                product = productService.getProductById(entry.getKey());  //почему требует try-catch
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Product product = productService.getProductById(entry.getKey());
             CashReceiptEntry cashReceiptEntry = new CashReceiptEntry();
             cashReceiptEntry.setQuantity(entry.getValue());
             cashReceiptEntry.setProduct(product);

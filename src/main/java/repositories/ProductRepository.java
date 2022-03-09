@@ -6,13 +6,13 @@ import java.util.Map;
 
 public interface ProductRepository {
 
-    Map<Integer, Product> getProducts();
+//    Map<Integer, Product> getProducts();
 
     Product getProductById(int id);
 
-    boolean addProduct(Product product);
+    Product save(Product product);
 
-    void deleteProductById(int id);
+    void delete(int id);
 
-    Product updateProduct(int id, Product product);
+    Product update(int id, Product product);
 }

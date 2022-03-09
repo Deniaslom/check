@@ -2,15 +2,13 @@ package repositories;
 
 import model.DiscountCard;
 
-import java.util.Map;
-
 public interface CartRepository {
-
-    Map<Integer, DiscountCard> getCarts();
 
     DiscountCard getCartById(int id);
 
-    boolean add(DiscountCard cart);
+    DiscountCard save(DiscountCard cart);
 
-    void deleteById(int id);
+    void delete(int id);
+
+    void update(int id, DiscountCard cart);
 }
