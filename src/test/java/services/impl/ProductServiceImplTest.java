@@ -1,6 +1,5 @@
 package services.impl;
 
-
 import model.Product;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +30,7 @@ class ProductServiceImplTest {
         productService.update(productFromDb.getId(), productFromDb);
         assert (productFromDb.equals(productService.getProductById(productFromDb.getId())));
     }
+
 
     @Test
     public void deleteProductAfterAdd(){

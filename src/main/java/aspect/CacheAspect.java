@@ -37,7 +37,7 @@ public class CacheAspect {
         log.info("update product in cache - " + product);
     }
 
-    //@Around(value = "execution(* services.impl.ProductServiceImpl.getProductById(..))")
+    @Around(value = "execution(* services.impl.ProductServiceImpl.getProductById(..))")
     public Object getProductById(ProceedingJoinPoint joinPoint) throws Throwable {
         int id = (int) joinPoint.getArgs()[0];
         Product product;
