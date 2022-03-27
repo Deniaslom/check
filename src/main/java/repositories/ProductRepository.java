@@ -2,6 +2,7 @@ package repositories;
 
 import model.Product;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ProductRepository {
@@ -15,4 +16,6 @@ public interface ProductRepository {
     void delete(int id);
 
     Product update(int id, Product product);
+
+    List<Product> findAll(int size, int page);
 }

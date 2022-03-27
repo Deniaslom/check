@@ -2,7 +2,6 @@ package services.impl;
 
 import model.CashReceipt;
 import model.CashReceiptRequest;
-import model.DiscountCard;
 import services.CashReceiptEntryService;
 import services.CashReceiptService;
 import services.DiscountCartService;

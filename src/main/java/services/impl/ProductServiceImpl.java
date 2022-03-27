@@ -5,8 +5,11 @@ import repositories.ProductRepository;
 import repositories.impl.ProductRepositoryImpl;
 import services.ProductService;
 
+import java.util.List;
+
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository = new ProductRepositoryImpl();
+
 
     public Product getProductById(int id) {
         return productRepository.getProductById(id);
@@ -26,4 +29,8 @@ public class ProductServiceImpl implements ProductService {
         productRepository.update(id, product);
     }
 
+    @Override
+    public List<Product> findAll(int size, int page) {
+        return productRepository.findAll(size, page);
+    }
 }

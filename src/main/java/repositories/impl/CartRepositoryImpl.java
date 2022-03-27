@@ -62,7 +62,7 @@ public class CartRepositoryImpl implements CartRepository {
     public void update(int id, DiscountCard cart) {
         @Cleanup PreparedStatement statement = cn.prepareStatement(UPDATE_CART_BY_ID);
         statement.setDouble(1, cart.getDiscount());
-        statement.setInt(2, cart.getNumber());
+        statement.setInt(2, id);
         statement.executeUpdate();
     }
 
