@@ -2,14 +2,17 @@ package services;
 
 import model.Product;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface ProductService {
-    public Optional<Product> getProductById(Integer id);
 
-    public Product addProduct(int id, Product product);
+    List<Product> findAll(int size, int page);
 
-    public void deleteProductById(int id);
+    Product getProductById(int id);
 
-    public Product updateProduct(int id, Product product);
+    Product save(Product product);
+
+    void delete(int id);
+
+    void update(int id, Product product);
 }

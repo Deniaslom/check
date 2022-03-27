@@ -48,6 +48,7 @@ public class CashReceiptPdfFilePrinter implements CashReceiptPrinter {
         document.close();
     }
 
+
     private Table getInfoTable() {
         Table table = new Table(UnitValue.createPercentArray(5)).useAllAvailableWidth().setMarginTop(100);
 

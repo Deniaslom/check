@@ -1,25 +1,23 @@
 package aspect;
 
+import caching.algoritm.Cache;
+import factory.CacheFactory;
 import lombok.extern.java.Log;
+import model.Product;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import caching.algoritm.Cache;
-import factory.CacheFactory;
-import model.Product;
-import repositories.ProductRepository;
-
-import java.util.Optional;
+import repositories.impl.ProductRepositoryImpl;
 
 
 @Aspect
 @Log
 public class CacheAspect {
     private static final Cache<Object> cache = CacheFactory.getInstance().getCache();
-    private ProductRepository productRepository = new ProductRepository();
+    private ProductRepositoryImpl productRepository = new ProductRepositoryImpl();
 
     @AfterReturning(value = "execution(* services.impl.ProductServiceImpl.addProduct(..))", returning = "product")
     public void addProduct(Product product) {
@@ -45,11 +43,13 @@ public class CacheAspect {
         Product product;
 
         if (cache.get(id) == null) {
-            product = productRepository.getProducts().get(id);
-            cache.set(product.getId(), product);
+            product = productRepository.getProductById(id);
+            if (product.getId() != null)
+                cache.set(product.getId(), product);
         }
         joinPoint.proceed();
-        log.info("get product from cache by id = " + id);;
-        return Optional.of(cache.get(id));
+        log.info("get product from cache by id = " + id);
+
+        return cache.get(id);
     }
 }

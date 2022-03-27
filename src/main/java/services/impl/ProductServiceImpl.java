@@ -2,34 +2,35 @@ package services.impl;
 
 import model.Product;
 import repositories.ProductRepository;
+import repositories.impl.ProductRepositoryImpl;
 import services.ProductService;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.Optional;
+import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
-    private ProductRepository productRepository = new ProductRepository();
+    private ProductRepository productRepository = new ProductRepositoryImpl();
 
-    public Optional<Product> getProductById(Integer id) {
-        return Optional.ofNullable(productRepository.getProducts().get(id));  //.orElseThrow()
+
+    public Product getProductById(int id) {
+        return productRepository.getProductById(id);
     }
 
-    public Product addProduct(int id, Product product) {
-        productRepository.getProducts().put(id, product);
+    public Product save(Product product) {
+        productRepository.save(product);
         return product;
     }
 
-    public void deleteProductById(int id) {
-        productRepository.getProducts().remove(id);
+    public void delete(int id) {
+        productRepository.delete(id);
     }
 
-    public Product updateProduct(int id, Product product) {
-        productRepository.getProducts().put(id, product);
-        return product;
+    @Override
+    public void update(int id, Product product) {
+        productRepository.update(id, product);
     }
 
-    private static BigDecimal getBigDecimal(double price) {
-        return new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+    @Override
+    public List<Product> findAll(int size, int page) {
+        return productRepository.findAll(size, page);
     }
 }

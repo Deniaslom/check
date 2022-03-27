@@ -1,5 +1,6 @@
 package services.impl;
 
+import lombok.SneakyThrows;
 import model.CashReceiptEntry;
 import model.CashReceiptRequest;
 import model.Product;
@@ -28,11 +29,9 @@ public class CashReceiptEntryServiceImpl implements CashReceiptEntryService {
 
         Map<Integer, Integer> productsWithQuantity = request.getProductsWithQuantity();
         Iterator<Map.Entry<Integer, Integer>> iterator = productsWithQuantity.entrySet().iterator();
-
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Map.Entry<Integer, Integer> entry = iterator.next();
-            Product product = productService.getProductById(entry.getKey()).orElseThrow(() -> new NullPointerException("product is missing by ID = " + entry.getKey()));
-
+            Product product = productService.getProductById(entry.getKey());
             CashReceiptEntry cashReceiptEntry = new CashReceiptEntry();
             cashReceiptEntry.setQuantity(entry.getValue());
             cashReceiptEntry.setProduct(product);

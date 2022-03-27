@@ -16,7 +16,9 @@ public class LRUCache<E> implements Cache<E> {
     private final int capacity;
     private Node heap = null;
 
-    /** @param capacity an integer */
+    /**
+     * @param capacity an integer
+     */
     public LRUCache(int capacity) {
         this.capacity = capacity;
     }
@@ -61,16 +63,16 @@ public class LRUCache<E> implements Cache<E> {
     @Override
     public void delete(int key) {
         Node target = cache.get(key);
-        if(target != null) {
+        if (target != null) {
             cache.remove(target.key);
-            if(target.prev == null){
+            if (target.prev == null) {
                 heap = target.next;
                 return;
             }
             Node prev = target.prev;
             Node next = target.next;
             prev.next = next;
-            if(next != null){
+            if (next != null) {
                 next.prev = prev;
             }
         }
@@ -82,6 +84,7 @@ public class LRUCache<E> implements Cache<E> {
 
     /**
      * add a node to the end of the linked list
+     *
      * @param setNode
      */
     private void linkedListUpdate(Node setNode) {
