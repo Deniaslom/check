@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import factories.CacheFactory;
+import factory.CacheFactory;
 
 import java.io.File;
 import java.io.IOException;
